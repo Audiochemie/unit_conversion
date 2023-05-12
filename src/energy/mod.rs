@@ -19,7 +19,7 @@ fn rcm_2_ev(energy_in_rcm: f64) -> f64 {
 
 
 lazy_static! {
-    pub static ref CONVERT_RCM_TO: HashMap<&'static str, Callback> = {
+    pub static ref CONVERT_2_RCM_FROM: HashMap<&'static str, Callback> = {
         let mut t = HashMap::new();
         t.insert("eV", ev_2_rcm as Callback);
     t
@@ -27,7 +27,7 @@ lazy_static! {
 }
 
 lazy_static! {
-    pub static ref CONVERT_EV_TO: HashMap<&'static str, Callback> = {
+    pub static ref CONVERT_2_EV_FROM: HashMap<&'static str, Callback> = {
         let mut t = HashMap::new();
         t.insert("rcm", rcm_2_ev as Callback);
     t
@@ -44,10 +44,10 @@ mod tests {
     #[test]
     fn it_works() {
         assert_eq!(
-            2.0_f64 * EV_REC_CENTIMETRES_CONVERSION_FACTOR, CONVERT_RCM_TO["eV"](2.0_f64)
+            2.0_f64 * EV_REC_CENTIMETRES_CONVERSION_FACTOR, CONVERT_2_RCM_FROM["eV"](2.0_f64)
         );
         assert_relative_eq!(
-            7.439_051_905_992_01*10e-5, CONVERT_EV_TO["rcm"](6000.0),
+            7.439_051_905_992_01*10e-5, CONVERT_2_EV_FROM["rcm"](6000.0),
         )
     }
 }
