@@ -9,6 +9,8 @@ const REC_CENTIMETRES_EV_CONVERSION_FACTOR: f64 = 1.239_841_984_332 * 10e-8;
 
 type Callback  = fn(f64) -> f64;
 
+fn unity(energy_in_arb: f64 ) -> f64 { energy_in_arb }
+
 fn ev_2_rcm(energy_in_ev: f64) -> f64 {
    energy_in_ev * EV_REC_CENTIMETRES_CONVERSION_FACTOR
 }
@@ -21,6 +23,7 @@ fn rcm_2_ev(energy_in_rcm: f64) -> f64 {
 lazy_static! {
     pub static ref CONVERT_2_RCM_FROM: HashMap<&'static str, Callback> = {
         let mut t = HashMap::new();
+        t.insert("rcm", unity as Callback);
         t.insert("eV", ev_2_rcm as Callback);
     t
     };
@@ -29,6 +32,7 @@ lazy_static! {
 lazy_static! {
     pub static ref CONVERT_2_EV_FROM: HashMap<&'static str, Callback> = {
         let mut t = HashMap::new();
+        t.insert("eV", unity as Callback);
         t.insert("rcm", rcm_2_ev as Callback);
     t
     };
